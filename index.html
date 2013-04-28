@@ -9,6 +9,7 @@
 <h1 id="y"></h1>
 <h1 id="z"></h1>
 
+<canvas id="myCanvas" resize></canvas>
 
 <textarea id="log" height=100 width=100></textarea>
 
@@ -16,16 +17,21 @@
 (function() {
   var d=document,
   h=d.getElementsByTagName('head')[0],
-  s=d.createElement('script'),
-  t=d.createElement('script');
-  s.type='text/javascript';
-  s.async=true;
-  s.src='client.js';
-  h.appendChild(s);
-  t.type='text/javascript';
-  t.async=true;
-  t.src='sampledata.js';
-  h.appendChild(t);
+  paper=d.createElement('script'),
+  data=d.createElement('script'),
+  client=d.createElement('script');
+  paper.type='text/javascript';
+  paper.async=true;
+  paper.src='paper/lib/paper.js';
+  h.appendChild(paper);
+  data.type='text/javascript';
+  data.async=true;
+  data.src='sampledata.js';
+  h.appendChild(data);
+  client.type='text/javascript';
+  client.async=true;
+  client.src='client.js';
+  h.appendChild(client);
 }());
 </script>
 </body>
