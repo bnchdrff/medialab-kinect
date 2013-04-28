@@ -41,25 +41,35 @@ window.onload = function() {
 
 
 //ws.onmessage = handleMsg;
-testws();
+//testws();
 
 // paper
-// Get a reference to the canvas object
 var canvas = document.getElementById('myCanvas');
-// Create an empty project and a view for the canvas:
 paper.setup(canvas);
-// Create a Paper.js Path to draw a line into it:
-var path = new paper.Path();
-// Give the stroke a color
-path.strokeColor = 'black';
-var start = new paper.Point(100, 100);
-// Move to start and draw a line from there
-path.moveTo(start);
-// Note that the plus operator on Point objects does not work
-// in JavaScript. Instead, we need to call the add() function:
-path.lineTo(start.add([ 200, -50 ]));
-// Draw the view now:
-paper.view.draw();
+
+var thingie1 = new paper.Path.Circle(new paper.Point(20,20), 20);
+thingie1.fillColor = 'red';
+var thingie2 = new paper.Path.Circle(new paper.Point(20,20), 20);
+thingie2.fillColor = 'green';
+
+var pos = 0,
+    len = benMadlyWavingHisHands.length;
+paper.view.onFrame = function(event) {
+  pos += 1;
+  if (pos < len) {
+    if (benMadlyWavingHisHands[pos].joint == 'SKEL_RIGHT_ELBOW') {
+      var x = Math.abs(benMadlyWavingHisHands[pos].x),
+          y = Math.abs(benMadlyWavingHisHands[pos].y);
+      thingie1.position = new paper.Point(x,y);
+    }
+    else if (benMadlyWavingHisHands[pos].joint == 'SKEL_LEFT_ELBOW') {
+      var x = Math.abs(benMadlyWavingHisHands[pos].x),
+          y = Math.abs(benMadlyWavingHisHands[pos].y);
+      thingie2.position = new paper.Point(x,y);
+    }
+  }
+}
+
 
 }
 
